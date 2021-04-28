@@ -1,6 +1,6 @@
 # JavaScript Mixins
 
-This is @naveenk2k and my project for [PESU](http://pes.edu/)'s UE18CS341 (Design Patterns) course.
+This is [@naveenk2k](https://github.com/naveenk2k) and my project for [PESU](http://pes.edu/)'s UE18CS341 (Design Patterns) course.
 
 ## Installation
 
