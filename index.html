@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mixins</title>
+</head>
+<body>
+Open the console to view the output.
+<script>
+    /**
+     * Base class.
+     */
+
+    class Animal {
+        constructor(food) {
+            this.food = food;
+        }
+
+        eat() {
+            return `Eating ${this.food}...`;
+        }
+
+        sleep() {
+            return 'Sleeping...';
+        }
+
+        reproduce() {
+            return 'Reproducing...';
+        }
+
+        speak() {
+            return 'Speaking...';
+        }
+    }
+
+    /**
+     * Child classes which override functions in their superclass.
+     */
+
+    class Dog extends Animal {
+        constructor() {
+            super('meat');
+        }
+
+        speak() {
+            return 'Woof';
+        }
+    }
+
+    class Cat extends Animal {
+        constructor() {
+            super('fish');
+        }
+
+        speak() {
+            return 'Meow';
+        }
+    }
+
+    class Cow extends Animal {
+        constructor() {
+            super('grass');
+        }
+
+        speak() {
+            return 'Moo';
+        }
+    }
+
+    class Pig extends Animal {
+        constructor() {
+            super('vegetables');
+        }
+
+        speak() {
+            return 'Oink';
+        }
+    }
+
+    /**
+     * Mixins which have access to the object's context.
+     */
+
+    const fourLeggedAnimalMixin = {
+        walk() {
+            return `${this.constructor.name} is walking...`;
+        },
+    };
+
+    const petMixin = {
+        performTrick() {
+            return 'Performing a trick...';
+        },
+    };
+
+    const farmAnimalMixin = {
+        escape() {
+            return 'Escaping from the pasture...';
+        },
+
+        goToBarn() {
+            return 'Going to the barn...';
+        },
+    };
+
+    /**
+     * Applying multiple mixins to each child class.
+     */
+
+    Object.assign(Dog.prototype, fourLeggedAnimalMixin);
+    Object.assign(Cat.prototype, fourLeggedAnimalMixin);
+    Object.assign(Cow.prototype, fourLeggedAnimalMixin);
+    Object.assign(Pig.prototype, fourLeggedAnimalMixin);
+    Object.assign(Dog.prototype, petMixin);
+    Object.assign(Cat.prototype, petMixin);
+    Object.assign(Cow.prototype, farmAnimalMixin);
+    Object.assign(Pig.prototype, farmAnimalMixin);
+
+    /**
+     * Demo.
+     */
+
+    console.log('***ANIMAL***');
+    const animal = new Animal('food');
+    console.log(animal.eat());
+    console.log(animal.speak());
+    console.log(animal.sleep());
+    console.log(animal.reproduce());
+
+    console.log('***DOG***');
+    const dog = new Dog();
+    console.log(dog.speak());
+    console.log(dog.eat());
+    console.log(dog.walk());
+    console.log(dog.performTrick());
+
+    console.log('***CAT***');
+    const cat = new Cat();
+    console.log(cat.speak());
+    console.log(cat.eat());
+    console.log(cat.walk());
+    console.log(cat.performTrick());
+
+    console.log('***COW***');
+    const cow = new Cow();
+    console.log(cow.speak());
+    console.log(cow.eat());
+    console.log(cow.walk());
+    console.log(cow.escape());
+    console.log(cow.goToBarn());
+
+    console.log('***PIG***');
+    const pig = new Pig();
+    console.log(pig.speak());
+    console.log(pig.eat());
+    console.log(pig.walk());
+    console.log(pig.escape());
+    console.log(pig.goToBarn());
+</script>
+</body>
+</html>
