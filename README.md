@@ -1,6 +1,6 @@
 # JavaScript Mixins
 
-This is [@naveenk2k](https://github.com/naveenk2k) and my project for [PESU](http://pes.edu/)'s UE18CS341 (Design Patterns) course.
+This project showcases the mixin design pattern using JavaScript. [@naveenk2k](https://github.com/naveenk2k) and I made this for [PESU](http://pes.edu/)'s UE18CS341 (Design Patterns) course.
 
 ## Installation
 

@@ -2,104 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mixins</title>
+    <title>JavaScript Mixins</title>
 </head>
 <body>
-Open the console to view the output.
+<input id="change-colored-button-color" type="button" value="Change color">
+<input id="change-colored-button-border" type="button" value="Change border">
+<input id="change-colored-button-background-color" type="button" value="Change background color">
+<input id="change-colored-button-font" type="button" value="Change font">
+<br><br>
+<div id="colored-button"></div>
+<hr>
+<input id="change-sized-button-height" type="button" value="Change height">
+<input id="change-sized-button-width" type="button" value="Change width">
+<input id="change-sized-button-border" type="button" value="Change border">
+<br><br>
+<div id="sized-button"></div>
 <script>
     /**
      * Base class.
      */
 
-    class Animal {
-        constructor(food) {
-            this.food = food;
+    class CustomButton {
+        /**
+         * @param {string} value The button's text content.
+         */
+        constructor(value) {
+            this.button = document.createElement('button');
+            this.button.textContent = value;
+            this.button.addEventListener('click', () => this.onClick());
         }
 
-        eat() {
-            return `Eating ${this.food}...`;
-        }
-
-        sleep() {
-            return 'Sleeping...';
-        }
-
-        reproduce() {
-            return 'Reproducing...';
-        }
-
-        speak() {
-            return 'Speaking...';
+        render() {
+            alert('Rendering...');
         }
     }
 
     /**
-     * Child classes which override functions in their superclass.
+     * Child classes which override the base class's methods.
      */
 
-    class Dog extends Animal {
-        constructor() {
-            super('meat');
+    class ColoredButton extends CustomButton {
+        /**
+         * @param {string} value The button's text content.
+         */
+        constructor(value) {
+            super(value);
         }
 
-        speak() {
-            return 'Woof';
-        }
-    }
-
-    class Cat extends Animal {
-        constructor() {
-            super('fish');
+        /**
+         * Randomly sets a color for the button.
+         */
+        updateColor() {
+            this.button.style.color = this.getRandomColor();
         }
 
-        speak() {
-            return 'Meow';
-        }
-    }
-
-    class Cow extends Animal {
-        constructor() {
-            super('grass');
+        getRandomColor() {
+            const colors = ['red', 'orange', 'green', 'blue', 'indigo', 'violet'];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        speak() {
-            return 'Moo';
+        render() {
+            document.querySelector('#colored-button').append(this.button);
         }
     }
 
-    class Pig extends Animal {
-        constructor() {
-            super('vegetables');
+    class SizedButton extends CustomButton {
+        /**
+         * @param {string} value The button's text content.
+         */
+        constructor(value) {
+            super(value);
         }
 
-        speak() {
-            return 'Oink';
+        /**
+         * Randomly sets a height for the button.
+         */
+        updateHeight() {
+            const height = Math.floor(Math.random() * 10);
+            this.button.style.paddingTop = `${height}em`;
+        }
+
+        /**
+         * Randomly sets a height for the button.
+         */
+        updateWidth() {
+            const width = Math.floor(Math.random() * 10);
+            this.button.style.paddingLeft = `${width}em`;
+        }
+
+        render() {
+            document.querySelector('#sized-button').append(this.button);
         }
     }
 
     /**
-     * Mixins which have access to the object's context.
+     * Mixins which have access to the object's state.
      */
 
-    const fourLeggedAnimalMixin = {
-        walk() {
-            return `${this.constructor.name} is walking...`;
+    const alertMixin = {
+        onClick() {
+            alert(`${this.button.textContent} got clicked on.`);
+        }
+    };
+
+    const borderMixin = {
+        updateBorderType() {
+            const styles = ['dashed', 'dotted', 'solid', 'hidden', 'double'];
+            this.button.style.borderStyle = styles[Math.floor(Math.random() * styles.length)];
         },
     };
 
-    const petMixin = {
-        performTrick() {
-            return 'Performing a trick...';
+    const backgroundMixin = {
+        updateBackgroundColor() {
+            this.button.style.backgroundColor = this.getRandomColor();
         },
-    };
-
-    const farmAnimalMixin = {
-        escape() {
-            return 'Escaping from the pasture...';
-        },
-
-        goToBarn() {
-            return 'Going to the barn...';
+        updateFont() {
+            const fonts = ['sans-serif', 'cursive', 'Georgia', 'Gill Sans', 'serif'];
+            this.button.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
         },
     };
 
@@ -107,55 +126,37 @@ Open the console to view the output.
      * Applying multiple mixins to each child class.
      */
 
-    Object.assign(Dog.prototype, fourLeggedAnimalMixin);
-    Object.assign(Cat.prototype, fourLeggedAnimalMixin);
-    Object.assign(Cow.prototype, fourLeggedAnimalMixin);
-    Object.assign(Pig.prototype, fourLeggedAnimalMixin);
-    Object.assign(Dog.prototype, petMixin);
-    Object.assign(Cat.prototype, petMixin);
-    Object.assign(Cow.prototype, farmAnimalMixin);
-    Object.assign(Pig.prototype, farmAnimalMixin);
+    Object.assign(ColoredButton.prototype, alertMixin);
+    Object.assign(SizedButton.prototype, alertMixin);
+    Object.assign(ColoredButton.prototype, borderMixin);
+    Object.assign(SizedButton.prototype, borderMixin);
+    Object.assign(ColoredButton.prototype, backgroundMixin);
 
     /**
      * Demo.
      */
 
-    console.log('***ANIMAL***');
-    const animal = new Animal('food');
-    console.log(animal.eat());
-    console.log(animal.speak());
-    console.log(animal.sleep());
-    console.log(animal.reproduce());
+    const coloredButton = new ColoredButton('Styled button');
+    document.querySelector('#change-colored-button-color').addEventListener('click', () => coloredButton.updateColor());
+    document
+        .querySelector('#change-colored-button-border')
+        .addEventListener('click', () => coloredButton.updateBorderType());
+    document
+        .querySelector('#change-colored-button-background-color')
+        .addEventListener('click', () => coloredButton.updateBackgroundColor());
+    document
+        .querySelector('#change-colored-button-font')
+        .addEventListener('click', () => coloredButton.updateFont());
+    document.querySelector('#change-colored-button-color').addEventListener('click', () => coloredButton.updateColor());
+    coloredButton.render();
 
-    console.log('***DOG***');
-    const dog = new Dog();
-    console.log(dog.speak());
-    console.log(dog.eat());
-    console.log(dog.walk());
-    console.log(dog.performTrick());
-
-    console.log('***CAT***');
-    const cat = new Cat();
-    console.log(cat.speak());
-    console.log(cat.eat());
-    console.log(cat.walk());
-    console.log(cat.performTrick());
-
-    console.log('***COW***');
-    const cow = new Cow();
-    console.log(cow.speak());
-    console.log(cow.eat());
-    console.log(cow.walk());
-    console.log(cow.escape());
-    console.log(cow.goToBarn());
-
-    console.log('***PIG***');
-    const pig = new Pig();
-    console.log(pig.speak());
-    console.log(pig.eat());
-    console.log(pig.walk());
-    console.log(pig.escape());
-    console.log(pig.goToBarn());
+    const sizedButton = new SizedButton('Sized button');
+    document.querySelector('#change-sized-button-height').addEventListener('click', () => sizedButton.updateHeight());
+    document.querySelector('#change-sized-button-width').addEventListener('click', () => sizedButton.updateWidth());
+    document
+        .querySelector('#change-sized-button-border')
+        .addEventListener('click', () => sizedButton.updateBorderType());
+    sizedButton.render();
 </script>
 </body>
 </html>
