@@ -10,5 +10,10 @@ Clone the repo using one of the following methods:
 
 ## Usage
 
-1. Open `index.html` in a browser.
-1. Open the console to view the output.
+Example 1: HTML Buttons
+   
+    Open `index.html` in a browser.
+
+Example 2: Printers (Multiple Inheritance)
+    
+    $ node multiple_inheritance.js
