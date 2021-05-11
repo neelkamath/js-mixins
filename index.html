@@ -17,6 +17,10 @@
 <input id="change-sized-button-border" type="button" value="Change border">
 <br><br>
 <div id="sized-button"></div>
+<hr>
+<input id="change-child-sized-button-border" type="button" value="Change border">
+<br><br>
+<div id="child-sized-button"></div>
 <script>
     /**
      * Base class.
@@ -90,19 +94,38 @@
             this.button.style.paddingLeft = `${width}em`;
         }
 
+        // The mixin will overwrite this method.
+        updateBorderType() {
+            alert('Updating border type...');
+        }
+
         render() {
             document.querySelector('#sized-button').append(this.button);
         }
     }
 
+    // Classes inherit their parent class's mixin functionality.
+    class ChildSizedButton extends SizedButton {
+        /**
+         * @param {string} value The button's text content.
+         */
+        constructor(value) {
+            super(value);
+        }
+
+        render() {
+            document.querySelector('#child-sized-button').append(this.button);
+        }
+    }
+
     /**
-     * Mixins which have access to the object's state.
+     * Mixins which have access to the object's state (i.e., <this>) but not the parent class (i.e., <super>).
      */
 
     const alertMixin = {
         onClick() {
             alert(`${this.button.textContent} got clicked on.`);
-        }
+        },
     };
 
     const borderMixin = {
@@ -157,6 +180,12 @@
         .querySelector('#change-sized-button-border')
         .addEventListener('click', () => sizedButton.updateBorderType());
     sizedButton.render();
+
+    const childSizedButton = new ChildSizedButton('Child sized button');
+    document.querySelector('#change-child-sized-button-border').addEventListener('click', () => {
+        setInterval(() => childSizedButton.updateBorderType(), 500);
+    });
+    childSizedButton.render();
 </script>
 </body>
 </html>
