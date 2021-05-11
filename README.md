@@ -13,4 +13,4 @@ Clone the repo using one of the following methods:
 ## Usage
 
 - Open `object-assign.html` in a browser to see the UI demo which uses the `Object.assign()` technique to implement mixins.
-- Open `multiple-inheritance.html` to see the printers demo which uses multiple inheritance to implement mixins.
+- Open `multiple-inheritance.html` in a browser to see the printers demo which uses multiple inheritance to implement mixins.
