@@ -2,6 +2,8 @@
 
 This project showcases the mixin design pattern using JavaScript. [@naveenk2k](https://github.com/naveenk2k) and I made this for [PESU](http://pes.edu/)'s UE18CS341 (Design Patterns) course.
 
+![Diagram](diagram.jpg)
+
 ## Installation
 
 1. Install [node.js](https://nodejs.org/en/download/).
@@ -11,5 +13,5 @@ This project showcases the mixin design pattern using JavaScript. [@naveenk2k](h
 
 ## Usage
 
-1. Open `index.html` in a browser to see the UI demo which uses the `Object.assign()` technique to implement mixins.
-1. Run `node multiple_inheritance.js` to see the printers demo which uses multiple inheritance to implement mixins.
+- Open `object-assign.html` in a browser to see the UI demo which uses the `Object.assign()` technique to implement mixins.
+- Open `multiple-inheritance.html` to see the printers demo which uses multiple inheritance to implement mixins.
