@@ -6,10 +6,9 @@ This project showcases the mixin design pattern using JavaScript. [@naveenk2k](h
 
 ## Installation
 
-1. Install [node.js](https://nodejs.org/en/download/).
-1. Clone the repo using one of the following methods:
-    - SSH: `git clone git@github.com:neelkamath/js-mixins.git`
-    - HTTPS: `git clone https://github.com/neelkamath/js-mixins.git`
+Clone the repo using one of the following methods:
+- SSH: `git clone git@github.com:neelkamath/js-mixins.git`
+- HTTPS: `git clone https://github.com/neelkamath/js-mixins.git`
 
 ## Usage
 

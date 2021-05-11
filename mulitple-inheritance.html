@@ -80,16 +80,14 @@ Open the console to view the output.
     }
 
 
-    const p = new EpsonPrinter();
-    p.print('Phasellus malesuada in lectus ac.');
-    p.showFaxNumber().sendFax('Lorem Ipsum', '+1 323 555 1234');
+    const epsonPrinter = new EpsonPrinter();
+    epsonPrinter.print('Phasellus malesuada in lectus ac.');
+    epsonPrinter.showFaxNumber().sendFax('Lorem Ipsum', '+1 323 555 1234');
     // p.scanFile('abc'); // Not allowed since Epson printers don't support this.
 
-    console.log();
-
-    const c = new CanonPrinter();
-    c.scanFile('Duis ac risus in justo.');
-    c.print('Donec consequat eros interdum tellus.');
+    const canonPrinter = new CanonPrinter();
+    canonPrinter.scanFile('Duis ac risus in justo.');
+    canonPrinter.print('Donec consequat eros interdum tellus.');
 </script>
 </body>
 </html>
