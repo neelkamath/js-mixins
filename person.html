@@ -28,7 +28,7 @@ Open the console to view the output.
             const values = Object.values(this.grades);
             if (values.length === 0) return 0;
             const total = values.reduce((prev, curr) => prev + curr, 0);
-            return total / values.length;
+            return (total / values.length / 10).toFixed(2);
         }
 
         update(subject, marks) {
